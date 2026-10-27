@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    padding: 32px 20px;
+    color: #17231d;
+    background-color: #f3f2e9;
+    background-image: radial-gradient(#17231d18 0.8px, transparent 0.8px);
+    background-size: 18px 18px;
+    font-family: "Trebuchet MS", sans-serif;
+}
+
+.menu {
+    width: min(100%, 520px);
+    padding: 40px clamp(22px, 7vw, 56px);
+    background: #fffef8;
+    border: 2px solid #17231d;
+    box-shadow: 9px 9px 0 #e5b548;
+}
+
+.eyebrow {
+    margin: 0 0 14px;
+    color: #59665c;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0 0 32px;
+    font-family: Georgia, serif;
+    font-size: clamp(32px, 8vw, 48px);
+    line-height: 1.05;
+}
+
+.page-list {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.page-button {
+    min-height: 62px;
+    display: grid;
+    grid-template-columns: 38px 1fr 24px;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border: 2px solid #17231d;
+    color: #17231d;
+    background: #fffef8;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: left;
+    text-decoration: none;
+    transition: color 140ms ease, background-color 140ms ease, transform 140ms ease;
+}
+
+.page-button:hover,
+.page-button:focus-visible {
+    color: #fffef8;
+    background: #245c43;
+    transform: translateX(4px);
+}
+
+.page-button:focus-visible {
+    outline: 3px solid #e5b548;
+    outline-offset: 3px;
+}
+
+.page-number {
+    color: #bd6b39;
+    font-family: Georgia, serif;
+    font-size: 14px;
+}
+
+.page-button:hover .page-number,
+.page-button:focus-visible .page-number {
+    color: #f1c96a;
+}
+
+.arrow {
+    justify-self: end;
+    font-size: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-button {
+        transition: none;
+    }
+}
