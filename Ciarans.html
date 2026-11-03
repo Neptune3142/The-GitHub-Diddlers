@@ -4,13 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="theme-color" content="#f3f2e9">
+    <title>Minesweeper | Ciara's Page</title>
+    <link rel="stylesheet" href="Ciarans.css">
+    <script src="Ciarans.js" defer></script>
 </head>
 
 <body>
-    <h1>header</h1>
-    <p> ouu shi </p>
+    <header class="site-header">
+        <a class="back-link" href="mainmenu.html"><span aria-hidden="true">&#8592;</span> Main menu</a>
+        <p class="eyebrow">Ciara's corner <span aria-hidden="true">/</span> a classic little challenge</p>
+    </header>
 
+    <main class="game-shell">
+        <section class="intro" aria-labelledby="page-title">
+            <p class="section-label">Think carefully. Click confidently.</p>
+            <h1 id="page-title">Minesweeper</h1>
+            <p>Uncover every safe tile, mark the mines, and try not to let the board fool you.</p>
+        </section>
+
+        <section class="game-card" aria-label="Minesweeper game">
+            <div class="game-settings">
+                <label class="difficulty-control" for="difficulty">
+                    <span>Board size</span>
+                    <select id="difficulty">
+                        <option value="beginner">Beginner · 9 × 9</option>
+                        <option value="intermediate">Intermediate · 16 × 16</option>
+                        <option value="expert">Expert · 16 × 30</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="game-bar">
+                <div class="counter" aria-label="Mines remaining">
+                    <span class="counter-icon" aria-hidden="true">&#9873;</span>
+                    <span class="counter-value" id="mine-count">010</span>
+                    <span class="counter-label">mines</span>
+                </div>
+                <button class="reset-button" id="reset-game" type="button" aria-label="Start a new game">🙂</button>
+                <div class="counter timer-counter" aria-label="Elapsed time">
+                    <span class="counter-icon" aria-hidden="true">&#9201;</span>
+                    <span class="counter-value" id="timer">000</span>
+                    <span class="counter-label">seconds</span>
+                </div>
+            </div>
+
+            <p class="game-status" id="game-status" role="status" aria-live="polite">
+                Choose a tile to begin. Your first click is safe.
+            </p>
+
+            <div class="board-scroll">
+                <div class="board" id="game-board" role="grid" aria-label="Minesweeper board"></div>
+            </div>
+
+            <div class="game-actions">
+                <button class="flag-mode-button" id="flag-mode" type="button" aria-pressed="false">
+                    <span aria-hidden="true">&#9873;</span> Flag mode: off
+                </button>
+                <span class="game-hint">Right-click a tile to flag it, or use flag mode for touch screens.</span>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">A small collection of pages <span aria-hidden="true">·</span> play at your own risk</footer>
 </body>
 
 </html>
