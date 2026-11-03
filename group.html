@@ -172,16 +172,14 @@
             height: 145px;
         }
 
-        .shield {
+        .hero-photo {
             z-index: 1;
-            display: grid;
-            width: 98px;
-            height: 112px;
-            place-items: center;
-            clip-path: polygon(50% 0, 92% 14%, 87% 68%, 50% 100%, 13% 68%, 8% 14%);
-            color: var(--ink);
-            background: var(--gold);
-            font-size: 50px;
+            width: 170px;
+            height: 190px;
+            border: 4px solid var(--card);
+            border-radius: 48% 48% 8px 8px;
+            object-fit: cover;
+            box-shadow: 5px 5px 0 var(--gold);
         }
 
         .section {
@@ -368,8 +366,8 @@
                 <p class="hero-copy">Computing can do more than connect us. It helps protect our information, spot fraud, and make sure the right people can access the right things.</p>
                 <a class="button" href="#applications">Explore the ideas <span aria-hidden="true">&rarr;</span></a>
             </div>
-            <div class="hero-art" aria-hidden="true">
-                <span class="shield">&#10003;</span>
+            <div class="hero-art">
+                <img class="hero-photo" src="mark.jpg" alt="Mark">
             </div>
         </section>
 
