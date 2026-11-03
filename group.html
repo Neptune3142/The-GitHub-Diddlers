@@ -1,8 +1,430 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<p>hi</p>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover how computing helps protect people, build trust, and make everyday life safer.">
+    <title>Computing for Good | Group Project</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #17231d;
+            --muted: #59665c;
+            --paper: #f3f2e9;
+            --card: #fffef8;
+            --green: #245c43;
+            --gold: #e5b548;
+            --orange: #bd6b39;
+        }
 
+        * {
+            box-sizing: border-box;
+        }
 
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 88px;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            background-image: radial-gradient(#17231d18 0.8px, transparent 0.8px);
+            background-size: 18px 18px;
+            font-family: "Trebuchet MS", sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .site-header {
+            position: sticky;
+            z-index: 2;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 14px max(24px, calc((100% - 1120px) / 2));
+            border-bottom: 2px solid var(--ink);
+            background: var(--card);
+        }
+
+        .brand {
+            font-family: Georgia, serif;
+            font-size: 19px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .site-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .site-nav a {
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+        }
+
+        .site-nav a:hover,
+        .site-nav a:focus-visible {
+            color: var(--green);
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--orange);
+            outline-offset: 4px;
+        }
+
+        main {
+            width: min(100% - 40px, 1120px);
+            margin: 0 auto;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.65fr);
+            align-items: center;
+            gap: 48px;
+            min-height: 470px;
+            padding: 76px 0;
+        }
+
+        .eyebrow {
+            margin: 0 0 14px;
+            color: var(--green);
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: Georgia, serif;
+            line-height: 1.12;
+        }
+
+        h1 {
+            max-width: 700px;
+            margin: 0;
+            font-size: clamp(44px, 8vw, 82px);
+            letter-spacing: -0.045em;
+        }
+
+        .hero-copy {
+            max-width: 590px;
+            margin: 22px 0 28px;
+            color: var(--muted);
+            font-size: clamp(17px, 2vw, 20px);
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 18px;
+            border: 2px solid var(--ink);
+            box-shadow: 4px 4px 0 var(--gold);
+            color: white;
+            background: var(--green);
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 140ms ease, box-shadow 140ms ease;
+        }
+
+        .button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--gold);
+        }
+
+        .hero-art {
+            position: relative;
+            display: grid;
+            min-height: 290px;
+            place-items: center;
+            border: 2px solid var(--ink);
+            background: var(--green);
+            box-shadow: 9px 9px 0 var(--gold);
+            overflow: hidden;
+        }
+
+        .hero-art::before,
+        .hero-art::after {
+            position: absolute;
+            width: 215px;
+            height: 215px;
+            border: 2px solid #fffef85c;
+            border-radius: 50%;
+            content: "";
+        }
+
+        .hero-art::after {
+            width: 145px;
+            height: 145px;
+        }
+
+        .shield {
+            z-index: 1;
+            display: grid;
+            width: 98px;
+            height: 112px;
+            place-items: center;
+            clip-path: polygon(50% 0, 92% 14%, 87% 68%, 50% 100%, 13% 68%, 8% 14%);
+            color: var(--ink);
+            background: var(--gold);
+            font-size: 50px;
+        }
+
+        .section {
+            padding: 76px 0;
+            border-top: 2px solid var(--ink);
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .section-heading h2 {
+            max-width: 540px;
+            margin: 0;
+            font-size: clamp(32px, 5vw, 50px);
+        }
+
+        .section-heading p {
+            max-width: 340px;
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .feature-card {
+            min-height: 260px;
+            padding: 26px;
+            border: 2px solid var(--ink);
+            background: var(--card);
+            box-shadow: 5px 5px 0 var(--gold);
+        }
+
+        .feature-icon {
+            display: grid;
+            width: 46px;
+            height: 46px;
+            margin-bottom: 22px;
+            place-items: center;
+            border: 2px solid var(--ink);
+            color: var(--green);
+            background: #e7eddc;
+            font-size: 23px;
+        }
+
+        .feature-card h3 {
+            margin: 0 0 10px;
+            font-size: 25px;
+        }
+
+        .feature-card p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .takeaway {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 40px;
+            align-items: start;
+            padding: 38px;
+            border: 2px solid var(--ink);
+            color: white;
+            background: var(--green);
+            box-shadow: 8px 8px 0 var(--gold);
+        }
+
+        .takeaway h2 {
+            margin: 0;
+            color: #f1c96a;
+            font-size: clamp(30px, 4vw, 42px);
+        }
+
+        .takeaway p {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .team-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .team-links a {
+            padding: 10px 14px;
+            border: 2px solid var(--ink);
+            background: var(--card);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .team-links a:hover {
+            color: white;
+            background: var(--green);
+        }
+
+        footer {
+            margin-top: 36px;
+            padding: 24px 20px;
+            border-top: 2px solid var(--ink);
+            color: var(--muted);
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 720px) {
+            .site-header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 8px;
+                padding: 12px 20px;
+            }
+
+            .site-nav {
+                gap: 14px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 54px 0;
+            }
+
+            .hero-art {
+                min-height: 220px;
+            }
+
+            .section-heading,
+            .takeaway {
+                grid-template-columns: 1fr;
+                align-items: start;
+            }
+
+            .section-heading {
+                display: grid;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                min-height: auto;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="#top">Computing for Good</a>
+        <nav class="site-nav" aria-label="Main navigation">
+            <a href="#applications">Applications</a>
+            <a href="#why-it-matters">Why it matters</a>
+            <a href="#team">Our project</a>
+        </nav>
+    </header>
+
+    <main id="top">
+        <section class="hero" aria-labelledby="page-title">
+            <div>
+                <p class="eyebrow">Positive applications of computing</p>
+                <h1 id="page-title">A safer digital world starts here.</h1>
+                <p class="hero-copy">Computing can do more than connect us. It helps protect our information, spot fraud, and make sure the right people can access the right things.</p>
+                <a class="button" href="#applications">Explore the ideas <span aria-hidden="true">&rarr;</span></a>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+                <span class="shield">&#10003;</span>
+            </div>
+        </section>
+
+        <section class="section" id="applications" aria-labelledby="applications-title">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Technology with purpose</p>
+                    <h2 id="applications-title">Small tools, meaningful protection.</h2>
+                </div>
+                <p>These everyday technologies help people use digital services with more confidence.</p>
+            </div>
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">&#128274;</div>
+                    <h3>Encryption</h3>
+                    <p>Encryption scrambles information so it cannot be understood without the right key. It helps keep messages, payments, and personal details private.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">&#128737;</div>
+                    <h3>Fraud protection</h3>
+                    <p>Digital systems can flag unusual activity and help prevent identity theft, phishing, and unauthorised transactions before more harm is done.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">&#10003;</div>
+                    <h3>Authentication</h3>
+                    <p>Passwords, biometrics, and multi-factor checks help verify who is signing in and keep accounts accessible to their rightful owners.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="why-it-matters" aria-labelledby="takeaway-title">
+            <div class="takeaway">
+                <h2 id="takeaway-title">Security supports trust.</h2>
+                <p>When privacy and identity are better protected, people can learn, communicate, shop, and access services online with greater peace of mind. Good computing puts people first.</p>
+            </div>
+        </section>
+
+        <section class="section" id="team" aria-labelledby="team-title">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Made together</p>
+                    <h2 id="team-title">Explore our group pages.</h2>
+                </div>
+                <p>Visit each contributor's page to see more of our project.</p>
+            </div>
+            <nav class="team-links" aria-label="Group member pages">
+                <a href="Aidans.html">Aidan's page <span aria-hidden="true">&rarr;</span></a>
+                <a href="Aryans.html">Aryan's page <span aria-hidden="true">&rarr;</span></a>
+                <a href="Ciarans.html">Ciaran's page <span aria-hidden="true">&rarr;</span></a>
+            </nav>
+        </section>
+    </main>
+
+    <footer>
+        <p>Group project · Positive applications of computing</p>
+    </footer>
+</body>
 </html>
