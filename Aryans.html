@@ -4,46 +4,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aryan & Aidan's Site</title>
+    <title>Mike Wazowski &amp; The Puppy Sanctuary | Insane Edition</title>
     <link rel="stylesheet" href="aryabn.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <img src="im.jpg" class="img-rounded" alt="Profile photo">
-        <h1>Hello World 👋</h1>
-        <p class="subtitle">Welcome to the most chaotic corner of the internet.</p>
+    <!-- CRT Scanline Retro Overlay -->
+    <div class="scanlines-overlay"></div>
+
+    <!-- 23-19 Emergency Alert Ticker -->
+    <div class="alert-banner">
+        <span>🚨 CODE 23-19 DECLARED: EXTREME PUPPY CUTENESS DETECTED ON LEVEL 4</span>
+        <span>•</span>
+        <span>ROZ IS WATCHING ALL PAPERWORK</span>
+        <span>•</span>
+        <span>SNOOT BOOPING AT MAXIMUM CAPACITY</span>
+    </div>
+
+    <!-- Sticky Monsters Inc HUD Navigation -->
+    <header class="monster-hud">
+        <div class="hud-logo">
+            <span class="eye-icon">👁️</span>
+            <span>WAZOWSKI &amp; PUPS</span>
+        </div>
+
+        <nav class="hud-nav">
+            <a href="#gameSection" class="hud-link active">🕹️ Play Game</a>
+            <a href="#cardsSection" class="hud-link">🐾 Pup Dossier</a>
+            <a href="#rozSection" class="hud-link">📋 Roz's Paperwork</a>
+            <a href="#soundboardSection" class="hud-link">🔊 Soundboard</a>
+            <a href="#clickerSection" class="hud-link">⚡ Laugh Clicker</a>
+        </nav>
+
+        <div class="hud-meters">
+            <div class="global-energy-badge">
+                <span class="energy-dot"></span>
+                <span>MONSTROPOLIS POWER: <strong id="hudPowerVal">9,420</strong> MW</span>
+            </div>
+            <button id="soundToggleBtn" class="hud-sound-toggle" title="Toggle Sound FX">
+                <span id="soundToggleIcon">🔊</span> SOUND: ON
+            </button>
+        </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Hero Header -->
+    <section class="hero">
+        <div class="avatar-container">
+            <img src="mike-wazowski-sulley-swap-primary.webp" class="img-rounded" alt="Mike Wazowski" onerror="this.src='im.jpg'">
+            <span class="badge">👁️ 100% CANINE CERTIFIED</span>
+        </div>
+        <h1>Mike Wazowski &amp; Puppies! 🐶</h1>
+        <p class="quote">"I cannot believe it... I'M ON A RECORD-BREAKING WEBSITE WITH PUPPIES!"</p>
+        <p class="subtitle">Scaring used to power Monstropolis. Now it is fueled 100% by puppy zoomies, floppy ears, and belly rubs.</p>
+    </section>
+
+    <!-- SECTION 1: THE PLAYABLE ARCADE GAME -->
+    <section id="gameSection" class="game-section">
+        <div class="arcade-cabinet">
+            <div class="arcade-marquee">
+                <div class="marquee-title">
+                    <span style="font-size: 1.8rem;">🕹️</span>
+                    <div>
+                        <h2>OPERATION 23-19: PUPPY RESCUE</h2>
+                        <span style="font-size: 0.8rem; color: #a3e635;">MONSTROPOLIS LAUGH FLOOR ARCADE v3.8</span>
+                    </div>
+                </div>
+                <div class="arcade-badges">
+                    <span class="arcade-tag">CANVAS 60FPS</span>
+                    <span class="arcade-tag hazard">HAZARD: 23-19</span>
+                </div>
+            </div>
+
+            <!-- Arcade In-Game HUD -->
+            <div class="arcade-hud-bar">
+                <div class="hud-stat">
+                    <span class="stat-label">Score</span>
+                    <span id="gameScore" class="stat-value score">0</span>
+                </div>
+                <div class="hud-stat">
+                    <span class="stat-label">High Score</span>
+                    <span id="gameHighScore" class="stat-value">0</span>
+                </div>
+                <div class="hud-stat">
+                    <span class="stat-label">Combo</span>
+                    <span id="gameCombo" class="stat-value">x1</span>
+                </div>
+                <div class="hud-stat">
+                    <span class="stat-label">Lives</span>
+                    <span id="gameLives" class="stat-value lives">❤️❤️❤️</span>
+                </div>
+                <div class="canister-wrapper">
+                    <span class="stat-label">Laugh Canister</span>
+                    <div class="canister-track">
+                        <div id="gameCanisterFill" class="canister-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas Viewport -->
+            <div class="canvas-wrapper">
+                <canvas id="wazowskiCanvas" width="800" height="450"></canvas>
+
+                <!-- Start Screen Overlay -->
+                <div id="gameStartOverlay" class="game-overlay">
+                    <div style="font-size: 4rem; margin-bottom: 10px;">🐶 👁️ 🧦</div>
+                    <h3 class="overlay-title">OPERATION 23-19</h3>
+                    <p class="overlay-desc">Catch the falling puppies to fill the Laugh Canister! Dodge white socks, Roz's paper flurries, and biohazard cones!</p>
+                    <div class="overlay-controls-guide">
+                        <span class="key-badge">⬅️ ➡️ Arrow Keys or A / D</span>
+                        <span class="key-badge">🖱️ Mouse / Touch Drag</span>
+                        <span class="key-badge">⚡ SPACE for Turbo Boost</span>
+                    </div>
+                    <button id="startGameBtn" class="arcade-btn">▶ START RESCUE MISSION</button>
+                </div>
+
+                <!-- Game Over Overlay -->
+                <div id="gameOverOverlay" class="game-overlay hidden">
+                    <div style="font-size: 4rem; margin-bottom: 10px;">🚨 📋 😱</div>
+                    <h3 class="overlay-title" id="gameOverHeading">23-19 INVASION!</h3>
+                    <p class="overlay-desc" id="gameOverStats">You rescued 0 puppies and collected 0 Laugh Megawatts!</p>
+                    <div style="margin-bottom: 20px;">
+                        <span id="gameOverRank" class="arcade-tag" style="font-size: 1rem; padding: 6px 16px;">RANK: PUPPY CADET</span>
+                    </div>
+                    <button id="restartGameBtn" class="arcade-btn">🔄 TRY AGAIN WAZOWSKI</button>
+                </div>
+            </div>
+
+            <!-- Touch / Mobile Controls Bar -->
+            <div class="arcade-controls-bar">
+                <div class="touch-btn-group">
+                    <button id="touchLeftBtn" class="touch-btn" aria-label="Move Left">⬅️</button>
+                    <button id="touchRightBtn" class="touch-btn" aria-label="Move Right">➡️</button>
+                </div>
+                <button id="touchBoostBtn" class="touch-btn boost-btn">⚡ TURBO ZOOM</button>
+                <div class="touch-btn-group">
+                    <button id="pauseGameBtn" class="touch-btn" title="Pause Game">⏸️</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: MONSTER PUPPIES DOSSIER & CREW -->
+    <div id="cardsSection" class="section-header">
+        <span class="section-tag">CLASSIFIED MONSTROPOLIS ARCHIVES</span>
+        <h2 class="section-title">The Canine Squad &amp; Crew</h2>
+        <p class="section-subtitle">Official records authorized by the Laugh Energy Commission and Mike Wazowski himself.</p>
+    </div>
+
     <main class="content">
         <section class="card">
-            <h2>🔥 Hot Takes</h2>
+            <h2>🐾 Top Monster Pups</h2>
             <ul>
-                <li>The goyim are insane</li>
-                <li>Aidan smells</li>
-                <li>I like trains</li>
-                <li>I like toast</li>
-                <li>Hello Aidan, women killer</li>
+                <li><strong>Golden Retriever:</strong> Pure sunshine &amp; 10,000 gigawatts of unconditional love.</li>
+                <li><strong>French Bulldog:</strong> Aerodynamic sphere head, eerily matches Mike's geometry.</li>
+                <li><strong>Samoyed Fluffball:</strong> Sulley's arctic miniature stunt double.</li>
+                <li><strong>Corgi Sploot Master:</strong> Low clearance chassis, high drift efficiency.</li>
+                <li><strong>Teacup Yorkie:</strong> Weighed at 3 lbs, feared by 98% of Monsters University alumni.</li>
             </ul>
         </section>
 
         <section class="card">
-            <h2>🏆 The Crew</h2>
+            <h2>👁️ Wazowski's Golden Rules</h2>
+            <ul>
+                <li>"Put that puppy down or so help me!" 🎶 (Or give it tummy scratches immediately).</li>
+                <li>Always submit Form 23-B to Roz before initiating game of fetch.</li>
+                <li>Puppy zoomie kinetic energy powers the downtown Scare/Laugh grid.</li>
+                <li>Booping the wet snoot is universally recognized as inter-species diplomacy.</li>
+                <li>If a slipper vanishes into the ethereal void, blame Randall Boggs.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>🏆 The Pup Patrol Roster</h2>
             <ol>
-                <li>Aryan</li>
-                <li>Aidan</li>
-                <li>Jonathan</li>
-                <li>Meow</li>
+                <li><strong>Aryan:</strong> Chief Canine Happiness Officer &amp; Treat Procurement Tsar.</li>
+                <li><strong>Aidan:</strong> Grand Commander of Chaos &amp; Backyard Zoomies Choreographer.</li>
+                <li><strong>Jonathan:</strong> Executive Vice President of Ear Scratches &amp; Ball Retrieval.</li>
+                <li><strong>Meow:</strong> Undercover Agent disguised as a feline, secretly barks when unsupervised.</li>
             </ol>
         </section>
     </main>
 
-    <!-- Bubbles Animation -->
+    <!-- SECTION 3: ROZ'S INTERACTIVE PAPERWORK BUREAU -->
+    <section id="rozSection" class="roz-section">
+        <div class="section-header">
+            <span class="section-tag">MONSTROPOLIS BUREAUCRACY</span>
+            <h2 class="section-title">Roz's Puppy Paperwork Desk</h2>
+            <p class="section-subtitle">"Wazowski... you didn't file your paperwork last night."</p>
+        </div>
+
+        <div class="roz-desk">
+            <div class="roz-dialogue-box">
+                <span class="roz-avatar">👓🐌</span>
+                <span class="roz-badge">DISPATCHER ROZ</span>
+                <p id="rozQuoteText" class="roz-quote">"I'm watching you, Wazowski. Always watching. Did you register that golden retriever puppy or not?"</p>
+                <div id="stampBox" class="stamp-box">APPROVED BY ROZ</div>
+            </div>
+
+            <form id="paperworkForm" class="paperwork-form" onsubmit="return false;">
+                <div class="form-group">
+                    <label class="form-label" for="pupNameInput">Puppy Code Name:</label>
+                    <input type="text" id="pupNameInput" class="form-input" placeholder="e.g. Barnaby Booperson" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="pupBreedSelect">Puppy Classification:</label>
+                    <select id="pupBreedSelect" class="form-select">
+                        <option value="golden">Golden Retriever (Max Laugh Output)</option>
+                        <option value="frenchie">French Bulldog (Wazowski Twin)</option>
+                        <option value="corgi">Corgi (High Agility)</option>
+                        <option value="pug">Pug (Single-Eyeball Sympathizer)</option>
+                        <option value="samoyed">Samoyed (Sulley Impersonator)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="hazardLevelSelect">Cuteness Threat Index:</label>
+                    <select id="hazardLevelSelect" class="form-select">
+                        <option value="low">Level 1: Mild Tail Wags</option>
+                        <option value="med">Level 2: Intense Tummy Rub Demands</option>
+                        <option value="crit">Level 23-19: Weaponized Puppy Eyes (Critical)</option>
+                    </select>
+                </div>
+
+                <button type="button" id="submitPaperworkBtn" class="submit-paperwork-btn">
+                    📋 SUBMIT PAPERWORK TO ROZ
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- SECTION 4: THE MONSTER PUPPY SOUNDBOARD -->
+    <section id="soundboardSection" class="soundboard-section">
+        <div class="section-header">
+            <span class="section-tag">SYNTHESIZED WEB AUDIO</span>
+            <h2 class="section-title">Monster &amp; Puppy Soundboard</h2>
+            <p class="section-subtitle">Realtime procedural audio synthesized in your browser. Click any sound pad!</p>
+        </div>
+
+        <div class="soundboard-grid">
+            <div class="sound-btn" data-sound="bark">
+                <span class="sound-icon">🐶</span>
+                <span class="sound-title">Happy Bark</span>
+                <span class="sound-desc">Synthesized hound woof</span>
+            </div>
+            <div class="sound-btn" data-sound="boop">
+                <span class="sound-icon">👃</span>
+                <span class="sound-title">Snoot Boop</span>
+                <span class="sound-desc">High pitch bubble chime</span>
+            </div>
+            <div class="sound-btn" data-sound="alarm">
+                <span class="sound-icon">🚨</span>
+                <span class="sound-title">23-19 Alarm!</span>
+                <span class="sound-desc">Emergency sock siren</span>
+            </div>
+            <div class="sound-btn" data-sound="collect">
+                <span class="sound-icon">⭐</span>
+                <span class="sound-title">Laugh Gem</span>
+                <span class="sound-desc">Arpeggiated chime</span>
+            </div>
+            <div class="sound-btn" data-sound="roz">
+                <span class="sound-icon">👓</span>
+                <span class="sound-title">Roz Grumble</span>
+                <span class="sound-desc">Low drone bureaucracy</span>
+            </div>
+            <div class="sound-btn" data-sound="powerup">
+                <span class="sound-icon">⚡</span>
+                <span class="sound-title">Sulley Roar</span>
+                <span class="sound-desc">Sub-bass power surge</span>
+            </div>
+            <div class="sound-btn" data-sound="pant">
+                <span class="sound-icon">👅</span>
+                <span class="sound-title">Puppy Pant</span>
+                <span class="sound-desc">Happy rhythmic breath</span>
+            </div>
+            <div class="sound-btn" data-sound="cheer">
+                <span class="sound-icon">🎉</span>
+                <span class="sound-title">Laugh Flood</span>
+                <span class="sound-desc">Monstropolis victory fanfare</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: LAUGH ENERGY CLICKER -->
+    <section id="clickerSection" class="clicker-section">
+        <div class="section-header">
+            <span class="section-tag">ENERGY GRID GENERATOR</span>
+            <h2 class="section-title">Laugh-O-Meter Power Clicker</h2>
+            <p class="section-subtitle">Click Mike to generate Megawatts of Laugh Power and unlock puppy upgrades!</p>
+        </div>
+
+        <div class="clicker-box">
+            <div class="clicker-counter"><span id="clickerCountVal">0</span> MW</div>
+            <p style="color: var(--text-dim); font-size: 0.9rem;">Clean, renewable puppy laugh electricity</p>
+
+            <button id="clickerTargetBtn" class="clicker-target-btn" aria-label="Click Mike Wazowski">
+                👁️
+            </button>
+
+            <div class="clicker-upgrades">
+                <button class="upgrade-pill" data-cost="20" data-power="1">🎾 Tennis Balls (+1 MW/click)</button>
+                <button class="upgrade-pill" data-cost="50" data-power="3">🦴 Squeaky Bones (+3 MW/click)</button>
+                <button class="upgrade-pill" data-cost="150" data-power="10">🛋️ Giant Dog Bed (+10 MW/click)</button>
+                <button class="upgrade-pill" data-cost="500" data-power="50">🚀 Roz Auto-Petter (+50 MW/click)</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Mike Wazowski Eyeball Bubbles -->
     <div class="bubbles">
+        <span class="bubble"></span>
         <span class="bubble"></span>
         <span class="bubble"></span>
         <span class="bubble"></span>
@@ -59,9 +333,798 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <p>Made with ❤️ (and questionable decisions) by <strong>Aryan</strong> &amp; <strong>Aidan</strong></p>
+        <p>🐾 Powered by <strong>Monsters, Inc. Laugh Energy</strong> &amp; infinite puppy cuddles | Crafted with 💚 by <strong>Aryan</strong> &amp; <strong>Aidan</strong> 👁️</p>
+        <div class="footer-nav">
+            <a href="#gameSection">Arcade Game</a>
+            <span>•</span>
+            <a href="#cardsSection">Pup Dossier</a>
+            <span>•</span>
+            <a href="#rozSection">Roz Desk</a>
+            <span>•</span>
+            <a href="#soundboardSection">Soundboard</a>
+        </div>
     </footer>
 
-</body>
+    <!-- ======================================================================
+         EMBEDDED SCRIPT ENGINE:
+         1. Procedural Web Audio Synthesizer (Zero external dependencies)
+         2. Arcade Canvas Game: Operation 23-19 Puppy Rescue
+         3. Roz Paperwork Bureau Interactivity
+         4. Laugh Energy Clicker & Particle System
+         ====================================================================== -->
+    <script>
+    (function () {
+        'use strict';
 
+        /* ── MODULE 1: PROCEDURAL WEB AUDIO SYNTHESIZER ──────────────────── */
+        var AudioEngine = (function () {
+            var audioCtx = null;
+            var isMuted = false;
+
+            function getContext() {
+                if (!audioCtx) {
+                    var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                    if (AudioContextClass) {
+                        audioCtx = new AudioContextClass();
+                    }
+                }
+                if (audioCtx && audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                return audioCtx;
+            }
+
+            function playTone(freq, type, duration, delay, gainLevel) {
+                if (isMuted) return;
+                var ctx = getContext();
+                if (!ctx) return;
+                delay = delay || 0;
+                gainLevel = gainLevel || 0.15;
+
+                var osc = ctx.createOscillator();
+                var gain = ctx.createGain();
+
+                osc.type = type || 'sine';
+                osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+
+                gain.gain.setValueAtTime(gainLevel, ctx.currentTime + delay);
+                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + delay + duration);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start(ctx.currentTime + delay);
+                osc.stop(ctx.currentTime + delay + duration);
+            }
+
+            return {
+                toggleMute: function () {
+                    isMuted = !isMuted;
+                    return !isMuted;
+                },
+                isAudioActive: function () {
+                    return !isMuted;
+                },
+                playBoop: function () {
+                    if (isMuted) return;
+                    var ctx = getContext();
+                    if (!ctx) return;
+                    var osc = ctx.createOscillator();
+                    var gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.12);
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.12);
+                },
+                playBark: function () {
+                    if (isMuted) return;
+                    var ctx = getContext();
+                    if (!ctx) return;
+                    var osc = ctx.createOscillator();
+                    var gain = ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(260, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(120, ctx.currentTime + 0.18);
+                    gain.gain.setValueAtTime(0.25, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.18);
+                },
+                playAlarm: function () {
+                    if (isMuted) return;
+                    playTone(900, 'sawtooth', 0.15, 0, 0.2);
+                    playTone(650, 'sawtooth', 0.15, 0.16, 0.2);
+                    playTone(900, 'sawtooth', 0.15, 0.32, 0.2);
+                    playTone(650, 'sawtooth', 0.2, 0.48, 0.2);
+                },
+                playCollect: function () {
+                    if (isMuted) return;
+                    playTone(523.25, 'triangle', 0.1, 0, 0.2);
+                    playTone(659.25, 'triangle', 0.1, 0.08, 0.2);
+                    playTone(783.99, 'triangle', 0.1, 0.16, 0.2);
+                    playTone(1046.50, 'triangle', 0.2, 0.24, 0.2);
+                },
+                playRoz: function () {
+                    if (isMuted) return;
+                    playTone(85, 'sawtooth', 0.3, 0, 0.25);
+                    playTone(75, 'sawtooth', 0.35, 0.2, 0.25);
+                },
+                playPowerup: function () {
+                    if (isMuted) return;
+                    var ctx = getContext();
+                    if (!ctx) return;
+                    var osc = ctx.createOscillator();
+                    var gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(150, ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(900, ctx.currentTime + 0.35);
+                    gain.gain.setValueAtTime(0.25, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.35);
+                },
+                playPant: function () {
+                    if (isMuted) return;
+                    playTone(320, 'sine', 0.08, 0, 0.1);
+                    playTone(300, 'sine', 0.08, 0.12, 0.1);
+                },
+                playCheer: function () {
+                    if (isMuted) return;
+                    playTone(440, 'triangle', 0.15, 0, 0.2);
+                    playTone(554.37, 'triangle', 0.15, 0.12, 0.2);
+                    playTone(659.25, 'triangle', 0.15, 0.24, 0.2);
+                    playTone(880, 'triangle', 0.4, 0.36, 0.25);
+                },
+                playHurt: function () {
+                    if (isMuted) return;
+                    playTone(180, 'square', 0.12, 0, 0.2);
+                    playTone(90, 'square', 0.2, 0.1, 0.2);
+                }
+            };
+        })();
+
+        // Sound Toggle Button Handler
+        var soundToggleBtn = document.getElementById('soundToggleBtn');
+        var soundToggleIcon = document.getElementById('soundToggleIcon');
+        if (soundToggleBtn) {
+            soundToggleBtn.addEventListener('click', function () {
+                var active = AudioEngine.toggleMute();
+                soundToggleBtn.innerHTML = active ? '<span>🔊</span> SOUND: ON' : '<span>🔇</span> SOUND: OFF';
+                if (active) AudioEngine.playBoop();
+            });
+        }
+
+        /* ── MODULE 2: INTERACTIVE SOUNDBOARD ────────────────────────────── */
+        var soundPads = document.querySelectorAll('.sound-btn');
+        soundPads.forEach(function (pad) {
+            pad.addEventListener('click', function () {
+                var soundType = pad.getAttribute('data-sound');
+                switch (soundType) {
+                    case 'bark': AudioEngine.playBark(); break;
+                    case 'boop': AudioEngine.playBoop(); break;
+                    case 'alarm': AudioEngine.playAlarm(); break;
+                    case 'collect': AudioEngine.playCollect(); break;
+                    case 'roz': AudioEngine.playRoz(); break;
+                    case 'powerup': AudioEngine.playPowerup(); break;
+                    case 'pant': AudioEngine.playPant(); break;
+                    case 'cheer': AudioEngine.playCheer(); break;
+                }
+            });
+        });
+
+        /* ── MODULE 3: ROZ'S PAPERWORK DESK ───────────────────────────────── */
+        var submitPaperworkBtn = document.getElementById('submitPaperworkBtn');
+        var rozQuoteText = document.getElementById('rozQuoteText');
+        var stampBox = document.getElementById('stampBox');
+        var pupNameInput = document.getElementById('pupNameInput');
+
+        var rozQuotes = [
+            "Your paperwork is in order, Wazowski. This time. Don't let me catch that dog shedding on the Laugh Floor.",
+            "I'm watching you, Wazowski. Always watching. Even when you're feeding puppies bacon treats.",
+            "Form 23-B accepted. But remember: if a sock disappears, it's 24 hours of filing for you.",
+            "Very well, Wazowski. Approved. Now take that fluffy beast and go make Monstropolis laugh."
+        ];
+
+        if (submitPaperworkBtn) {
+            submitPaperworkBtn.addEventListener('click', function () {
+                var name = (pupNameInput && pupNameInput.value.trim()) || "Barnaby";
+                AudioEngine.playBoop();
+
+                if (stampBox) {
+                    stampBox.style.display = 'block';
+                    stampBox.textContent = 'APPROVED: ' + name.toUpperCase();
+                }
+
+                if (rozQuoteText) {
+                    var quote = rozQuotes[Math.floor(Math.random() * rozQuotes.length)];
+                    rozQuoteText.textContent = '"' + quote + '"';
+                }
+
+                setTimeout(function () {
+                    AudioEngine.playCollect();
+                }, 300);
+            });
+        }
+
+        /* ── MODULE 4: LAUGH ENERGY CLICKER & PARTICLE FX ─────────────────── */
+        var clickerTargetBtn = document.getElementById('clickerTargetBtn');
+        var clickerCountVal = document.getElementById('clickerCountVal');
+        var hudPowerVal = document.getElementById('hudPowerVal');
+        var clickPower = 1;
+        var totalLaughPower = 0;
+
+        function spawnParticle(x, y, text) {
+            var p = document.createElement('div');
+            p.className = 'click-particle';
+            p.textContent = text;
+            p.style.left = x + 'px';
+            p.style.top = y + 'px';
+            document.body.appendChild(p);
+            setTimeout(function () {
+                if (p.parentNode) p.parentNode.removeChild(p);
+            }, 1000);
+        }
+
+        if (clickerTargetBtn) {
+            clickerTargetBtn.addEventListener('click', function (e) {
+                totalLaughPower += clickPower;
+                if (clickerCountVal) clickerCountVal.textContent = totalLaughPower.toLocaleString();
+                if (hudPowerVal) hudPowerVal.textContent = (9420 + totalLaughPower).toLocaleString();
+                AudioEngine.playBoop();
+                spawnParticle(e.clientX, e.clientY, '+' + clickPower + ' MW ⚡');
+            });
+        }
+
+        var upgradePills = document.querySelectorAll('.upgrade-pill');
+        upgradePills.forEach(function (pill) {
+            pill.addEventListener('click', function () {
+                var cost = parseInt(pill.getAttribute('data-cost'), 10);
+                var power = parseInt(pill.getAttribute('data-power'), 10);
+                if (totalLaughPower >= cost) {
+                    totalLaughPower -= cost;
+                    clickPower += power;
+                    if (clickerCountVal) clickerCountVal.textContent = totalLaughPower.toLocaleString();
+                    pill.textContent = '✅ Upgraded! (+' + power + ')';
+                    pill.style.borderColor = '#a3e635';
+                    AudioEngine.playPowerup();
+                } else {
+                    AudioEngine.playHurt();
+                    pill.style.borderColor = '#ef4444';
+                    setTimeout(function () { pill.style.borderColor = ''; }, 400);
+                }
+            });
+        });
+
+        /* ── MODULE 5: ARCADE CANVAS GAME (OPERATION 23-19) ──────────────── */
+        var canvas = document.getElementById('wazowskiCanvas');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+
+        var gameScoreEl = document.getElementById('gameScore');
+        var gameHighScoreEl = document.getElementById('gameHighScore');
+        var gameComboEl = document.getElementById('gameCombo');
+        var gameLivesEl = document.getElementById('gameLives');
+        var gameCanisterFill = document.getElementById('gameCanisterFill');
+        var gameStartOverlay = document.getElementById('gameStartOverlay');
+        var gameOverOverlay = document.getElementById('gameOverOverlay');
+        var gameOverStats = document.getElementById('gameOverStats');
+        var gameOverRank = document.getElementById('gameOverRank');
+        var startGameBtn = document.getElementById('startGameBtn');
+        var restartGameBtn = document.getElementById('restartGameBtn');
+        var pauseGameBtn = document.getElementById('pauseGameBtn');
+        var touchLeftBtn = document.getElementById('touchLeftBtn');
+        var touchRightBtn = document.getElementById('touchRightBtn');
+        var touchBoostBtn = document.getElementById('touchBoostBtn');
+
+        // Saved High Score
+        var highScore = 0;
+        try {
+            highScore = parseInt(localStorage.getItem('wazowski_hiscore') || '0', 10);
+        } catch (err) {}
+        if (gameHighScoreEl) gameHighScoreEl.textContent = highScore;
+
+        // Game State Variables
+        var isPlaying = false;
+        var isPaused = false;
+        var score = 0;
+        var combo = 1;
+        var lives = 3;
+        var canister = 0; // 0 to 100
+        var puppiesRescued = 0;
+        var frameCount = 0;
+        var spawnRate = 65; // frames between spawns
+
+        // Player: Mike Wazowski
+        var player = {
+            x: canvas.width / 2,
+            y: canvas.height - 70,
+            radius: 34,
+            speed: 7,
+            vx: 0,
+            eyeTargetX: canvas.width / 2,
+            eyeTargetY: canvas.height / 2,
+            isBoosting: false,
+            boostTimer: 0
+        };
+
+        // Key Input State
+        var keys = {
+            left: false,
+            right: false,
+            boost: false
+        };
+
+        // Game Entities
+        var items = [];      // Puppies and Hazards
+        var particles = [];  // Sparkles & Hearts
+
+        // Entity Types Configuration
+        var ENTITY_TYPES = [
+            { type: 'pup_golden', isPup: true, emoji: '🐶', name: 'Golden Pup', pts: 100, canister: 8, r: 24, speed: 2.8 },
+            { type: 'pup_corgi', isPup: true, emoji: '🐾', name: 'Corgi', pts: 150, canister: 12, r: 22, speed: 3.4 },
+            { type: 'pup_frenchie', isPup: true, emoji: '🐶', name: 'Frenchie', pts: 120, canister: 10, r: 22, speed: 3.0 },
+            { type: 'pup_sulley', isPup: true, emoji: '🐩', name: 'Sulley Pup', pts: 250, canister: 20, r: 26, speed: 3.6 },
+            { type: 'bone_star', isPup: true, emoji: '⭐', name: 'Golden Bone', pts: 300, canister: 25, r: 20, speed: 4.2 },
+            { type: 'hazard_sock', isPup: false, emoji: '🧦', name: '23-19 White Sock', r: 24, speed: 3.5 },
+            { type: 'hazard_paper', isPup: false, emoji: '📋', name: 'Roz Paperwork', r: 24, speed: 3.8 },
+            { type: 'hazard_cone', isPup: false, emoji: '🚨', name: 'Biohazard Cone', r: 26, speed: 4.0 }
+        ];
+
+        function resetGame() {
+            score = 0;
+            combo = 1;
+            lives = 3;
+            canister = 0;
+            puppiesRescued = 0;
+            frameCount = 0;
+            spawnRate = 65;
+            items = [];
+            particles = [];
+            player.x = canvas.width / 2;
+            player.vx = 0;
+            player.isBoosting = false;
+            updateHud();
+        }
+
+        function updateHud() {
+            if (gameScoreEl) gameScoreEl.textContent = score;
+            if (gameComboEl) gameComboEl.textContent = 'x' + combo;
+            if (gameCanisterFill) gameCanisterFill.style.width = Math.min(100, canister) + '%';
+            if (gameLivesEl) {
+                var hearts = '';
+                for (var i = 0; i < lives; i++) hearts += '❤️';
+                gameLivesEl.textContent = hearts || '💀';
+            }
+        }
+
+        function createParticles(x, y, color, count) {
+            for (var i = 0; i < count; i++) {
+                var angle = Math.random() * Math.PI * 2;
+                var speed = Math.random() * 4 + 1.5;
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    color: color,
+                    size: Math.random() * 5 + 2,
+                    alpha: 1,
+                    decay: Math.random() * 0.03 + 0.02
+                });
+            }
+        }
+
+        function spawnItem() {
+            var isHazard = Math.random() < 0.32;
+            var candidates = ENTITY_TYPES.filter(function (e) {
+                return isHazard ? !e.isPup : e.isPup;
+            });
+            var pick = candidates[Math.floor(Math.random() * candidates.length)];
+            items.push({
+                x: Math.random() * (canvas.width - 80) + 40,
+                y: -30,
+                r: pick.r,
+                speed: pick.speed + (score > 1000 ? 0.7 : 0),
+                isPup: pick.isPup,
+                emoji: pick.emoji,
+                pts: pick.pts || 0,
+                canister: pick.canister || 0,
+                name: pick.name,
+                rot: 0,
+                vRot: (Math.random() - 0.5) * 0.05
+            });
+        }
+
+        function triggerSuperLaughFloor() {
+            AudioEngine.playCheer();
+            createParticles(player.x, player.y, '#bef264', 40);
+            createParticles(canvas.width / 2, 100, '#38bdf8', 30);
+            score += 500;
+            canister = 0;
+            updateHud();
+        }
+
+        // Custom Canvas Rendering of Mike Wazowski
+        function drawMikeWazowski(x, y, r, isNearHazard) {
+            ctx.save();
+            ctx.translate(x, y);
+
+            // Legs
+            ctx.strokeStyle = '#65a30d';
+            ctx.lineWidth = 4;
+            ctx.lineCap = 'round';
+            // Left leg
+            ctx.beginPath();
+            ctx.moveTo(-12, r - 6);
+            ctx.lineTo(-18, r + 24);
+            ctx.lineTo(-28, r + 26);
+            ctx.stroke();
+            // Right leg
+            ctx.beginPath();
+            ctx.moveTo(12, r - 6);
+            ctx.lineTo(18, r + 24);
+            ctx.lineTo(28, r + 26);
+            ctx.stroke();
+
+            // Arms
+            ctx.beginPath();
+            ctx.moveTo(-r + 4, 4);
+            ctx.lineTo(-r - 14, -8);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(r - 4, 4);
+            ctx.lineTo(r + 14, -8);
+            ctx.stroke();
+
+            // Little Horns
+            ctx.fillStyle = '#fef08a';
+            ctx.beginPath();
+            ctx.moveTo(-16, -r + 4);
+            ctx.lineTo(-22, -r - 12);
+            ctx.lineTo(-10, -r + 2);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(16, -r + 4);
+            ctx.lineTo(22, -r - 12);
+            ctx.lineTo(10, -r + 2);
+            ctx.fill();
+
+            // Round Green Body
+            var bodyGrad = ctx.createRadialGradient(-8, -8, 6, 0, 0, r);
+            bodyGrad.addColorStop(0, '#bef264');
+            bodyGrad.addColorStop(0.7, '#84cc16');
+            bodyGrad.addColorStop(1, '#4d7c0f');
+            ctx.fillStyle = bodyGrad;
+            ctx.beginPath();
+            ctx.arc(0, 0, r, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Mike's Giant Eyeball Sclera (White)
+            var eyeRadius = r * 0.48;
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(0, -2, eyeRadius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#3f6212';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // Eyeball Iris (Green) tracking nearest puppy
+            var dx = player.eyeTargetX - x;
+            var dy = player.eyeTargetY - y;
+            var angle = Math.atan2(dy, dx);
+            var maxPupilDist = eyeRadius * 0.38;
+            var px = Math.cos(angle) * maxPupilDist;
+            var py = -2 + Math.sin(angle) * maxPupilDist;
+
+            var irisGrad = ctx.createRadialGradient(px, py, 1, px, py, eyeRadius * 0.55);
+            irisGrad.addColorStop(0, '#22c55e');
+            irisGrad.addColorStop(0.8, '#15803d');
+            irisGrad.addColorStop(1, '#052e16');
+            ctx.fillStyle = irisGrad;
+            ctx.beginPath();
+            ctx.arc(px, py, eyeRadius * 0.52, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Pupil (Black)
+            ctx.fillStyle = '#000000';
+            ctx.beginPath();
+            ctx.arc(px, py, eyeRadius * 0.26, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Eye Glint (White glossy sparkle)
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(px - 3, py - 3, eyeRadius * 0.1, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Mouth (Smile or Shocked based on hazard)
+            ctx.strokeStyle = '#052e16';
+            ctx.fillStyle = '#450a0a';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            if (isNearHazard) {
+                // Shocked "O" mouth
+                ctx.arc(0, r * 0.52, 6, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.stroke();
+            } else {
+                // Happy big smile with teeth
+                ctx.arc(0, r * 0.32, r * 0.38, 0.15 * Math.PI, 0.85 * Math.PI, false);
+                ctx.stroke();
+            }
+
+            ctx.restore();
+        }
+
+        function gameLoop() {
+            if (!isPlaying) return;
+
+            if (!isPaused) {
+                frameCount++;
+
+                // Clear Canvas with arcade grid effect
+                ctx.fillStyle = '#06130b';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Subtle animated Monstropolis background doors & grid
+                ctx.strokeStyle = 'rgba(163, 230, 53, 0.07)';
+                ctx.lineWidth = 1;
+                for (var gx = 0; gx < canvas.width; gx += 40) {
+                    ctx.beginPath();
+                    ctx.moveTo(gx, 0);
+                    ctx.lineTo(gx, canvas.height);
+                    ctx.stroke();
+                }
+                for (var gy = 0; gy < canvas.height; gy += 40) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, gy);
+                    ctx.lineTo(canvas.width, gy);
+                    ctx.stroke();
+                }
+
+                // Player Movement Physics
+                var speedMultiplier = player.isBoosting ? 1.7 : 1.0;
+                if (keys.left) player.vx = -player.speed * speedMultiplier;
+                else if (keys.right) player.vx = player.speed * speedMultiplier;
+                else player.vx *= 0.75; // Friction
+
+                player.x += player.vx;
+                if (player.x - player.radius < 10) player.x = 10 + player.radius;
+                if (player.x + player.radius > canvas.width - 10) player.x = canvas.width - 10 - player.radius;
+
+                if (player.isBoosting) {
+                    player.boostTimer--;
+                    if (player.boostTimer <= 0) player.isBoosting = false;
+                    createParticles(player.x, player.y + player.radius, '#a3e635', 1);
+                }
+
+                // Spawn items periodically
+                if (frameCount % spawnRate === 0) {
+                    spawnItem();
+                    if (frameCount % 400 === 0 && spawnRate > 35) spawnRate -= 3;
+                }
+
+                // Find nearest item for Mike's eyeball gaze
+                var nearestPup = null;
+                var nearestDist = 999999;
+                var isNearHazard = false;
+
+                // Update & Render falling items
+                for (var i = items.length - 1; i >= 0; i--) {
+                    var item = items[i];
+                    item.y += item.speed;
+                    item.rot += item.vRot;
+
+                    var d = Math.hypot(item.x - player.x, item.y - player.y);
+                    if (d < nearestDist && item.isPup) {
+                        nearestDist = d;
+                        nearestPup = item;
+                    }
+                    if (d < 110 && !item.isPup) {
+                        isNearHazard = true;
+                    }
+
+                    // Collision Detection with Mike
+                    if (d < player.radius + item.r) {
+                        if (item.isPup) {
+                            // CATCH PUPPY!
+                            score += item.pts * combo;
+                            combo++;
+                            canister += item.canister;
+                            puppiesRescued++;
+                            createParticles(item.x, item.y, '#bef264', 16);
+                            AudioEngine.playCollect();
+
+                            if (canister >= 100) {
+                                triggerSuperLaughFloor();
+                            }
+                        } else {
+                            // HIT HAZARD (23-19 SOCK / PAPERWORK)
+                            lives--;
+                            combo = 1;
+                            createParticles(item.x, item.y, '#ef4444', 20);
+                            AudioEngine.playAlarm();
+
+                            if (lives <= 0) {
+                                endGame();
+                                return;
+                            }
+                        }
+                        updateHud();
+                        items.splice(i, 1);
+                        continue;
+                    }
+
+                    // Item fell past bottom
+                    if (item.y > canvas.height + 40) {
+                        if (item.isPup) combo = 1; // Missed a pup drops combo
+                        updateHud();
+                        items.splice(i, 1);
+                        continue;
+                    }
+
+                    // Draw item emoji
+                    ctx.save();
+                    ctx.translate(item.x, item.y);
+                    ctx.rotate(item.rot);
+                    ctx.font = (item.r * 1.6) + 'px sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(item.emoji, 0, 0);
+                    ctx.restore();
+                }
+
+                // Set eye target
+                if (nearestPup) {
+                    player.eyeTargetX = nearestPup.x;
+                    player.eyeTargetY = nearestPup.y;
+                } else {
+                    player.eyeTargetX = canvas.width / 2;
+                    player.eyeTargetY = canvas.height / 2;
+                }
+
+                // Render Particles
+                for (var pIdx = particles.length - 1; pIdx >= 0; pIdx--) {
+                    var part = particles[pIdx];
+                    part.x += part.vx;
+                    part.y += part.vy;
+                    part.alpha -= part.decay;
+                    if (part.alpha <= 0) {
+                        particles.splice(pIdx, 1);
+                        continue;
+                    }
+                    ctx.fillStyle = part.color;
+                    ctx.globalAlpha = Math.max(0, part.alpha);
+                    ctx.beginPath();
+                    ctx.arc(part.x, part.y, part.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.globalAlpha = 1.0;
+                }
+
+                // Draw Mike Wazowski
+                drawMikeWazowski(player.x, player.y, player.radius, isNearHazard);
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function startGame() {
+            resetGame();
+            isPlaying = true;
+            isPaused = false;
+            if (gameStartOverlay) gameStartOverlay.classList.add('hidden');
+            if (gameOverOverlay) gameOverOverlay.classList.add('hidden');
+            AudioEngine.playBoop();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function endGame() {
+            isPlaying = false;
+            AudioEngine.playHurt();
+
+            if (score > highScore) {
+                highScore = score;
+                try {
+                    localStorage.setItem('wazowski_hiscore', highScore.toString());
+                } catch (e) {}
+                if (gameHighScoreEl) gameHighScoreEl.textContent = highScore;
+            }
+
+            var rank = 'ROOKIE SNOOT BOOPER';
+            if (score > 4000) rank = 'LEGENDARY PUPPY WHISPERER 👑';
+            else if (score > 2000) rank = 'EXECUTIVE LAUGH CANISTER PRO ⭐';
+            else if (score > 800) rank = 'CERTIFIED SCARE-FLOOR CADET 🐾';
+
+            if (gameOverStats) {
+                gameOverStats.textContent = 'You rescued ' + puppiesRescued + ' puppies and scored ' + score + ' Laugh Points!';
+            }
+            if (gameOverRank) {
+                gameOverRank.textContent = 'RANK: ' + rank;
+            }
+            if (gameOverOverlay) {
+                gameOverOverlay.classList.remove('hidden');
+            }
+        }
+
+        // Control Event Listeners
+        if (startGameBtn) startGameBtn.addEventListener('click', startGame);
+        if (restartGameBtn) restartGameBtn.addEventListener('click', startGame);
+
+        if (pauseGameBtn) {
+            pauseGameBtn.addEventListener('click', function () {
+                isPaused = !isPaused;
+                pauseGameBtn.textContent = isPaused ? '▶️' : '⏸️';
+            });
+        }
+
+        // Keyboard Controls
+        window.addEventListener('keydown', function (e) {
+            if (e.code === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = true;
+            if (e.code === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = true;
+            if (e.code === 'Space') {
+                player.isBoosting = true;
+                player.boostTimer = 45;
+                e.preventDefault();
+            }
+        });
+
+        window.addEventListener('keyup', function (e) {
+            if (e.code === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = false;
+            if (e.code === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = false;
+        });
+
+        // Touch & Virtual Button Controls
+        if (touchLeftBtn) {
+            touchLeftBtn.addEventListener('touchstart', function (e) { e.preventDefault(); keys.left = true; });
+            touchLeftBtn.addEventListener('touchend', function (e) { e.preventDefault(); keys.left = false; });
+            touchLeftBtn.addEventListener('mousedown', function () { keys.left = true; });
+            touchLeftBtn.addEventListener('mouseup', function () { keys.left = false; });
+        }
+        if (touchRightBtn) {
+            touchRightBtn.addEventListener('touchstart', function (e) { e.preventDefault(); keys.right = true; });
+            touchRightBtn.addEventListener('touchend', function (e) { e.preventDefault(); keys.right = false; });
+            touchRightBtn.addEventListener('mousedown', function () { keys.right = true; });
+            touchRightBtn.addEventListener('mouseup', function () { keys.right = false; });
+        }
+        if (touchBoostBtn) {
+            touchBoostBtn.addEventListener('click', function () {
+                player.isBoosting = true;
+                player.boostTimer = 50;
+                AudioEngine.playBoop();
+            });
+        }
+
+        // Mouse & Touch Drag on Canvas
+        function updatePlayerFromPointer(clientX) {
+            var rect = canvas.getBoundingClientRect();
+            var scale = canvas.width / rect.width;
+            var targetX = (clientX - rect.left) * scale;
+            player.x = Math.max(player.radius + 10, Math.min(canvas.width - player.radius - 10, targetX));
+        }
+
+        canvas.addEventListener('mousemove', function (e) {
+            if (isPlaying && !isPaused) updatePlayerFromPointer(e.clientX);
+        });
+
+        canvas.addEventListener('touchmove', function (e) {
+            if (isPlaying && !isPaused && e.touches.length > 0) {
+                e.preventDefault();
+                updatePlayerFromPointer(e.touches[0].clientX);
+            }
+        }, { passive: false });
+
+    })();
+    </script>
+</body>
 </html>
