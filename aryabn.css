@@ -1,176 +1,107 @@
-/* ── Reset & Base ─────────────────────────────────── */
+/* ==========================================================================
+   MIKE WAZOWSKI & PUPPIES SANCTUARY - INSANE ULTRA EDITION STYLESHEET
+   1000+ LINE SUITE: MONSTROPOLIS CYBER-LIME & RETRO ARCADE THEME
+   ========================================================================== */
+
+/* ── 1. CSS Variables & Theme Engine ─────────────────────────────────────── */
+:root {
+  --bg-deep: #070c0a;
+  --bg-card: rgba(13, 31, 23, 0.75);
+  --bg-card-hover: rgba(18, 48, 35, 0.88);
+  --border-neon: #a3e635;
+  --border-subtle: rgba(163, 230, 53, 0.25);
+  --neon-lime: #a3e635;
+  --neon-green: #22c55e;
+  --neon-cyan: #06b6d4;
+  --neon-teal: #14b8a6;
+  --neon-yellow: #facc15;
+  --neon-purple: #c084fc;
+  --neon-pink: #f472b6;
+  --hazard-orange: #fb923c;
+  --hazard-red: #ef4444;
+  --text-primary: #f0fdf4;
+  --text-muted: #86efac;
+  --text-dim: rgba(220, 252, 231, 0.7);
+  --font-heading: 'Fredoka One', 'Poppins', cursive, sans-serif;
+  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-code: 'JetBrains Mono', 'Fira Code', monospace;
+  --glow-lime: 0 0 25px rgba(163, 230, 53, 0.55);
+  --glow-strong: 0 0 45px rgba(163, 230, 53, 0.85), 0 0 15px rgba(74, 222, 128, 0.9);
+  --glow-cyan: 0 0 25px rgba(6, 182, 212, 0.5);
+  --glow-hazard: 0 0 30px rgba(239, 68, 68, 0.6);
+  --door-wood: #78350f;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+}
+
+/* ── 2. Universal Resets & Base ─────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
 body {
-  font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle at 50% 10%, #173322 0%, #0d1e1c 40%, #0a0e17 100%);
-  color: #e5fbf0;
+  font-family: var(--font-body);
+  background-color: var(--bg-deep);
+  background-image: 
+    radial-gradient(circle at 50% 0%, #1a3d24 0%, transparent 45%),
+    radial-gradient(circle at 10% 40%, rgba(6, 182, 212, 0.12) 0%, transparent 35%),
+    radial-gradient(circle at 90% 70%, rgba(163, 230, 53, 0.1) 0%, transparent 40%),
+    linear-gradient(180deg, #070c0a 0%, #0d1e16 50%, #060a08 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  line-height: 1.6;
 }
 
-/* ── Hero ─────────────────────────────────────────── */
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 50px 20px 30px;
-  text-align: center;
-  position: relative;
-  z-index: 2;
+/* Selection */
+::selection {
+  background: var(--neon-lime);
+  color: #052e16;
 }
 
-.avatar-container {
-  position: relative;
-  display: inline-block;
-  margin-bottom: 22px;
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #060e0a;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--neon-lime), var(--neon-teal));
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-lime);
 }
 
-.img-rounded {
-  width: 170px;
-  height: 170px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 5px solid #a3e635;
-  box-shadow: 0 0 35px rgba(163, 230, 53, 0.6), 0 0 10px rgba(74, 222, 128, 0.8);
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
-  background-color: #1a2e1a;
+/* ── 3. Scanlines Overlay & Ambient Effects ──────────────────────────────── */
+.scanlines-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 99;
+  opacity: 0.35;
 }
 
-.img-rounded:hover {
-  transform: scale(1.08) rotate(-4deg);
-  box-shadow: 0 0 50px rgba(163, 230, 53, 0.9), 0 0 20px rgba(45, 212, 191, 0.8);
-}
-
-.badge {
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #a3e635;
-  color: #0b200b;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  padding: 4px 14px;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-  white-space: nowrap;
-}
-
-h1 {
-  font-family: 'Fredoka One', 'Poppins', cursive, sans-serif;
-  font-size: 3.2rem;
-  font-weight: 800;
-  background: linear-gradient(90deg, #bef264, #4ade80, #38bdf8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.5px;
-  margin-bottom: 8px;
-}
-
-.quote {
-  font-style: italic;
-  font-size: 1.15rem;
-  color: #fef08a;
-  background: rgba(254, 240, 138, 0.1);
-  border-left: 4px solid #facc15;
-  padding: 8px 18px;
-  border-radius: 6px;
-  margin: 10px 0 14px;
-  max-width: 580px;
-}
-
-.subtitle {
-  font-size: 1.05rem;
-  color: rgba(220, 252, 231, 0.8);
-  max-width: 600px;
-}
-
-/* ── Main Content Grid ────────────────────────────── */
-.content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 26px;
-  justify-content: center;
-  padding: 20px 40px 70px;
-  position: relative;
-  z-index: 2;
-  max-width: 1250px;
-  margin: 0 auto;
-}
-
-.card {
-  background: rgba(18, 38, 30, 0.65);
-  border: 1px solid rgba(163, 230, 53, 0.25);
-  backdrop-filter: blur(14px);
-  border-radius: 20px;
-  padding: 28px 30px;
-  min-width: 280px;
-  max-width: 370px;
-  flex: 1;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(163, 230, 53, 0.7);
-  box-shadow: 0 18px 45px rgba(163, 230, 53, 0.2), 0 0 20px rgba(34, 197, 94, 0.25);
-}
-
-.card h2 {
-  font-size: 1.35rem;
-  font-weight: 700;
-  margin-bottom: 16px;
-  color: #bef264;
-  border-bottom: 2px dashed rgba(163, 230, 53, 0.3);
-  padding-bottom: 8px;
-}
-
-.card ul, .card ol {
-  padding-left: 22px;
-  line-height: 1.9;
-  color: #d1fae5;
-}
-
-.card li {
-  margin-bottom: 8px;
-  transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.card li:hover {
-  transform: translateX(4px);
-  color: #facc15;
-}
-
-.card strong {
-  color: #ffffff;
-}
-
-/* ── Footer ───────────────────────────────────────── */
-.footer {
-  text-align: center;
-  padding: 24px;
-  background: rgba(7, 18, 14, 0.85);
-  border-top: 1px solid rgba(163, 230, 53, 0.2);
-  color: rgba(209, 250, 229, 0.8);
-  font-size: 0.95rem;
-  position: relative;
-  z-index: 10;
-}
-
-.footer strong {
-  color: #a3e635;
-}
-
-/* ── Mike Wazowski Floating Eyeball Bubbles ───────── */
+/* ── 4. Floating Eyeball Bubbles ─────────────────────────────────────────── */
 .bubbles, .animations {
   position: fixed;
   top: 0;
@@ -185,42 +116,1045 @@ h1 {
 .bubble, .randoms {
   position: absolute;
   bottom: -150px;
-  /* Mike Wazowski Eyeball Style: Pupil + Green Iris + White Sclera + Glassy sheen */
   background: 
-    radial-gradient(circle at 35% 35%, #ffffff 0%, #ffffff 8%, transparent 12%),
+    radial-gradient(circle at 35% 35%, #ffffff 0%, #ffffff 10%, transparent 14%),
     radial-gradient(circle at 50% 50%, #000000 0%, #000000 24%, #4ade80 26%, #15803d 48%, #ffffff 52%, #f1f5f9 100%);
-  border: 2px solid rgba(163, 230, 53, 0.5);
+  border: 2px solid rgba(163, 230, 53, 0.6);
   box-shadow: 
-    0 0 15px rgba(74, 222, 128, 0.5),
-    inset 0 0 8px rgba(0, 0, 0, 0.2);
+    0 0 20px rgba(74, 222, 128, 0.6),
+    inset 0 0 10px rgba(0, 0, 0, 0.3);
   border-radius: 50%;
-  animation: floatUp linear infinite;
+  animation: floatWazowskiEye linear infinite;
+  transition: transform 0.3s;
 }
 
-@keyframes floatUp {
+@keyframes floatWazowskiEye {
   0% {
-    transform: translateY(0) translateX(0) rotate(0deg) scale(0.9);
+    transform: translateY(0) translateX(0) rotate(0deg) scale(0.85);
     opacity: 0;
   }
-  12% {
+  10% {
     opacity: 0.95;
   }
-  88% {
+  85% {
     opacity: 0.95;
   }
   100% {
-    transform: translateY(-118vh) translateX(55px) rotate(180deg) scale(1.2);
+    transform: translateY(-120vh) translateX(60px) rotate(220deg) scale(1.25);
     opacity: 0;
   }
 }
 
-/* Bubble sizes, positions, and staggered timings */
-.bubble:nth-child(1) { left: 6%;  width: 52px;  height: 52px;  animation-duration: 9s;  animation-delay: 0s; }
-.bubble:nth-child(2) { left: 20%; width: 34px;  height: 34px;  animation-duration: 13s; animation-delay: 2.5s; }
-.bubble:nth-child(3) { left: 36%; width: 68px;  height: 68px;  animation-duration: 11s; animation-delay: 1s; }
-.bubble:nth-child(4) { left: 52%; width: 42px;  height: 42px;  animation-duration: 8.5s; animation-delay: 4.5s; }
-.bubble:nth-child(5) { left: 66%; width: 58px;  height: 58px;  animation-duration: 12.5s; animation-delay: 2s; }
-.bubble:nth-child(6) { left: 82%; width: 32px;  height: 32px;  animation-duration: 10s; animation-delay: 5s; }
-.bubble:nth-child(7) { left: 46%; width: 78px;  height: 78px;  animation-duration: 14s; animation-delay: 6s; }
+.bubble:nth-child(1) { left: 5%;  width: 55px;  height: 55px;  animation-duration: 9s;   animation-delay: 0s; }
+.bubble:nth-child(2) { left: 18%; width: 35px;  height: 35px;  animation-duration: 13s;  animation-delay: 2.5s; }
+.bubble:nth-child(3) { left: 34%; width: 72px;  height: 72px;  animation-duration: 11s;  animation-delay: 1s; }
+.bubble:nth-child(4) { left: 51%; width: 44px;  height: 44px;  animation-duration: 8.5s; animation-delay: 4.5s; }
+.bubble:nth-child(5) { left: 68%; width: 62px;  height: 62px;  animation-duration: 12.5s; animation-delay: 2s; }
+.bubble:nth-child(6) { left: 82%; width: 32px;  height: 32px;  animation-duration: 10s;  animation-delay: 5s; }
+.bubble:nth-child(7) { left: 45%; width: 85px;  height: 85px;  animation-duration: 14s;  animation-delay: 6s; }
+.bubble:nth-child(8) { left: 92%; width: 50px;  height: 50px;  animation-duration: 11.5s; animation-delay: 3s; }
+.randoms:nth-child(1) { left: 12%; width: 48px; height: 48px; animation-duration: 10s;  animation-delay: 1.5s; }
 
-.randoms:nth-child(1) { left: 14%; width: 48px; height: 48px; animation-duration: 10.5s; animation-delay: 1.5s; }
+/* ── 5. Sticky Monster HUD / Navigation ──────────────────────────────────── */
+.monster-hud {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(7, 18, 13, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 2px solid rgba(163, 230, 53, 0.35);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hud-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--neon-lime);
+  text-shadow: 0 0 10px rgba(163, 230, 53, 0.6);
+}
+
+.hud-logo span.eye-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #a3e635;
+  color: #06240d;
+  font-size: 1.1rem;
+  box-shadow: 0 0 12px var(--neon-lime);
+}
+
+.hud-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hud-link {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.hud-link:hover, .hud-link.active {
+  color: var(--neon-lime);
+  background: rgba(163, 230, 53, 0.12);
+  border-color: rgba(163, 230, 53, 0.3);
+  text-shadow: 0 0 8px rgba(163, 230, 53, 0.5);
+}
+
+.hud-meters {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.hud-sound-toggle {
+  background: rgba(163, 230, 53, 0.15);
+  border: 1px solid var(--neon-lime);
+  color: var(--neon-lime);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.hud-sound-toggle:hover {
+  background: var(--neon-lime);
+  color: #052e16;
+  box-shadow: var(--glow-lime);
+}
+
+/* Live Global Energy Meter in HUD */
+.global-energy-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(163, 230, 53, 0.3);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--neon-yellow);
+}
+
+.energy-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--neon-lime);
+  box-shadow: 0 0 8px var(--neon-lime);
+  animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+/* ── 6. Hero Banner & 23-19 Emergency Alert ───────────────────────────────── */
+.alert-banner {
+  background: linear-gradient(90deg, #b91c1c, #ea580c, #b91c1c);
+  background-size: 200% 100%;
+  animation: hazardStripes 3s linear infinite;
+  color: #fff;
+  text-align: center;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 2px 15px rgba(239, 68, 68, 0.5);
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes hazardStripes {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px 40px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.avatar-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 24px;
+}
+
+.img-rounded {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid var(--neon-lime);
+  box-shadow: var(--glow-strong);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+  background-color: #122416;
+}
+
+.img-rounded:hover {
+  transform: scale(1.1) rotate(-4deg);
+  box-shadow: 0 0 60px rgba(163, 230, 53, 0.95), 0 0 25px rgba(6, 182, 212, 0.8);
+}
+
+.badge {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, #a3e635, #4ade80);
+  color: #052e16;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  padding: 5px 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
+  white-space: nowrap;
+}
+
+h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 800;
+  background: linear-gradient(90deg, #bef264 0%, #4ade80 40%, #38bdf8 70%, #f472b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.quote {
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fef08a;
+  background: rgba(254, 240, 138, 0.08);
+  border-left: 5px solid var(--neon-yellow);
+  padding: 10px 22px;
+  border-radius: 8px;
+  margin: 12px 0 16px;
+  max-width: 650px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.subtitle {
+  font-size: 1.12rem;
+  color: var(--text-dim);
+  max-width: 680px;
+}
+
+/* ── 7. Interactive Arcade Section (Mike Wazowski Game) ──────────────────── */
+.game-section {
+  max-width: 960px;
+  margin: 30px auto 60px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 5;
+}
+
+.arcade-cabinet {
+  background: linear-gradient(180deg, #13241b 0%, #09130d 100%);
+  border: 3px solid var(--neon-lime);
+  border-radius: 28px;
+  box-shadow: 
+    var(--glow-strong),
+    0 25px 60px rgba(0, 0, 0, 0.8),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+.arcade-marquee {
+  background: linear-gradient(90deg, #0f2c1c, #1f5033, #0f2c1c);
+  padding: 18px 24px;
+  border-bottom: 3px solid var(--neon-lime);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.marquee-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.marquee-title h2 {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: var(--neon-lime);
+  text-shadow: 0 0 15px rgba(163, 230, 53, 0.7);
+  letter-spacing: 0.5px;
+}
+
+.arcade-badges {
+  display: flex;
+  gap: 8px;
+}
+
+.arcade-tag {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--neon-lime);
+  color: var(--neon-lime);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.arcade-tag.hazard {
+  border-color: var(--hazard-orange);
+  color: var(--hazard-orange);
+}
+
+/* Game Stats Bar */
+.arcade-hud-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #060e09;
+  padding: 12px 20px;
+  border-bottom: 2px solid rgba(163, 230, 53, 0.25);
+  font-family: var(--font-code);
+  font-size: 0.95rem;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.hud-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-label {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--neon-lime);
+  text-shadow: 0 0 8px rgba(163, 230, 53, 0.6);
+}
+
+.stat-value.score {
+  color: var(--neon-yellow);
+}
+
+.stat-value.lives {
+  color: var(--neon-pink);
+}
+
+/* Laugh Canister Energy Progress Bar */
+.canister-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+}
+
+.canister-track {
+  flex: 1;
+  height: 18px;
+  background: #020804;
+  border: 2px solid var(--neon-lime);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
+}
+
+.canister-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #16a34a, #a3e635, #fef08a);
+  box-shadow: 0 0 15px rgba(163, 230, 53, 0.9);
+  transition: width 0.25s ease;
+  position: relative;
+}
+
+.canister-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%
+  );
+  background-size: 16px 16px;
+  animation: canisterStripes 1s linear infinite;
+}
+
+@keyframes canisterStripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 16px 0; }
+}
+
+/* Canvas Viewport */
+.canvas-wrapper {
+  position: relative;
+  width: 100%;
+  background: #040906;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 16 / 9;
+  max-height: 520px;
+}
+
+#wazowskiCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+}
+
+/* Canvas Overlays (Menu & Game Over) */
+.game-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(4, 11, 7, 0.88);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+.game-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay-title {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  color: var(--neon-lime);
+  text-shadow: 0 0 20px rgba(163, 230, 53, 0.8);
+  margin-bottom: 8px;
+}
+
+.overlay-desc {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+.overlay-controls-guide {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.key-badge {
+  background: rgba(163, 230, 53, 0.15);
+  border: 1px solid var(--neon-lime);
+  color: var(--neon-lime);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font-code);
+}
+
+.arcade-btn {
+  background: linear-gradient(180deg, #bef264, #84cc16);
+  color: #052e16;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  padding: 12px 36px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 
+    0 8px 25px rgba(163, 230, 53, 0.6),
+    0 4px 0 #4d7c0f;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.arcade-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 35px rgba(163, 230, 53, 0.8),
+    0 6px 0 #4d7c0f;
+}
+
+.arcade-btn:active {
+  transform: translateY(3px);
+  box-shadow: 
+    0 2px 10px rgba(163, 230, 53, 0.4),
+    0 1px 0 #4d7c0f;
+}
+
+/* Mobile & Touch Controls Bar */
+.arcade-controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0a1710;
+  padding: 12px 24px;
+  border-top: 2px solid rgba(163, 230, 53, 0.2);
+}
+
+.touch-btn-group {
+  display: flex;
+  gap: 12px;
+}
+
+.touch-btn {
+  background: rgba(163, 230, 53, 0.15);
+  border: 1px solid var(--neon-lime);
+  color: var(--neon-lime);
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  transition: all 0.1s;
+}
+
+.touch-btn:active {
+  background: var(--neon-lime);
+  color: #052e16;
+  transform: scale(0.92);
+}
+
+.touch-btn.boost-btn {
+  width: auto;
+  padding: 0 20px;
+  font-size: 0.95rem;
+  border-color: var(--neon-yellow);
+  color: var(--neon-yellow);
+}
+
+/* ── 8. Cards & Feature Sections ─────────────────────────────────────────── */
+.section-header {
+  text-align: center;
+  margin-bottom: 35px;
+  position: relative;
+  z-index: 2;
+}
+
+.section-tag {
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+  color: var(--neon-lime);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  color: var(--text-dim);
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+  padding: 20px 24px 60px;
+  max-width: 1260px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  box-shadow: 
+    0 12px 35px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s, box-shadow 0.35s;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--neon-lime), var(--neon-cyan));
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(163, 230, 53, 0.65);
+  box-shadow: 
+    0 22px 50px rgba(0, 0, 0, 0.6),
+    0 0 25px rgba(163, 230, 53, 0.25);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card h2 {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  color: #bef264;
+  border-bottom: 2px dashed rgba(163, 230, 53, 0.3);
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card ul, .card ol {
+  padding-left: 20px;
+  line-height: 1.85;
+  color: #d1fae5;
+}
+
+.card li {
+  margin-bottom: 10px;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.card li:hover {
+  transform: translateX(5px);
+  color: var(--neon-yellow);
+}
+
+.card strong {
+  color: #ffffff;
+}
+
+/* ── 9. Interactive Roz Paperwork Simulator ──────────────────────────────── */
+.roz-section {
+  max-width: 960px;
+  margin: 30px auto 70px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 5;
+}
+
+.roz-desk {
+  background: linear-gradient(135deg, #1b281f 0%, #0d1912 100%);
+  border: 2px solid rgba(163, 230, 53, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 34px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .roz-desk {
+    grid-template-columns: 1fr;
+  }
+}
+
+.roz-dialogue-box {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(163, 230, 53, 0.25);
+  border-radius: 18px;
+  padding: 24px;
+  position: relative;
+}
+
+.roz-avatar {
+  font-size: 3rem;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.roz-quote {
+  font-family: var(--font-code);
+  font-size: 1.05rem;
+  color: #fed7aa;
+  margin-bottom: 12px;
+  min-height: 55px;
+}
+
+.roz-badge {
+  display: inline-block;
+  background: #ea580c;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+}
+
+.paperwork-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--neon-lime);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-input, .form-select {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(163, 230, 53, 0.3);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus, .form-select:focus {
+  outline: none;
+  border-color: var(--neon-lime);
+  box-shadow: 0 0 10px rgba(163, 230, 53, 0.4);
+}
+
+.submit-paperwork-btn {
+  background: linear-gradient(90deg, #ea580c, #f97316);
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(234, 88, 12, 0.4);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.submit-paperwork-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(234, 88, 12, 0.6);
+}
+
+.stamp-box {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  border: 3px dashed #22c55e;
+  color: #22c55e;
+  font-family: var(--font-code);
+  font-weight: 900;
+  text-align: center;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  animation: stampIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes stampIn {
+  0% { transform: scale(2) rotate(-15deg); opacity: 0; }
+  100% { transform: scale(1) rotate(-5deg); opacity: 1; }
+}
+
+/* ── 10. Interactive Soundboard ──────────────────────────────────────────── */
+.soundboard-section {
+  max-width: 1000px;
+  margin: 30px auto 70px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 5;
+}
+
+.soundboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.sound-btn {
+  background: rgba(13, 31, 23, 0.8);
+  border: 1px solid rgba(163, 230, 53, 0.3);
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.sound-btn:hover {
+  transform: translateY(-5px) scale(1.03);
+  border-color: var(--neon-lime);
+  background: rgba(22, 54, 38, 0.9);
+  box-shadow: var(--glow-lime);
+}
+
+.sound-btn:active {
+  transform: scale(0.96);
+}
+
+.sound-icon {
+  font-size: 2.2rem;
+}
+
+.sound-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--neon-lime);
+}
+
+.sound-desc {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+/* ── 11. Monstropolis Laugh Energy Clicker / Live Converter ─────────────── */
+.clicker-section {
+  max-width: 960px;
+  margin: 30px auto 70px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 5;
+}
+
+.clicker-box {
+  background: linear-gradient(135deg, #102418 0%, #07130b 100%);
+  border: 2px solid var(--neon-cyan);
+  border-radius: var(--radius-lg);
+  padding: 36px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), var(--glow-cyan);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.clicker-target-btn {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #4ade80 0%, #15803d 70%, #052e16 100%);
+  border: 5px solid #bef264;
+  box-shadow: 0 0 30px rgba(163, 230, 53, 0.7);
+  font-size: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 20px 0;
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s;
+  user-select: none;
+}
+
+.clicker-target-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 45px rgba(163, 230, 53, 0.95);
+}
+
+.clicker-target-btn:active {
+  transform: scale(0.92);
+}
+
+.clicker-counter {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--neon-yellow);
+  text-shadow: 0 0 15px rgba(250, 204, 21, 0.6);
+  margin-bottom: 6px;
+}
+
+.clicker-upgrades {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.upgrade-pill {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  color: var(--neon-cyan);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.upgrade-pill:hover {
+  background: var(--neon-cyan);
+  color: #04242d;
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.7);
+}
+
+/* ── 12. Floating Click Particle FX ──────────────────────────────────────── */
+.click-particle {
+  position: fixed;
+  pointer-events: none;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--neon-lime);
+  text-shadow: 0 0 10px rgba(163, 230, 53, 0.8);
+  animation: floatParticle 1s ease-out forwards;
+  z-index: 1000;
+}
+
+@keyframes floatParticle {
+  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+  100% { transform: translate(-50%, -120px) scale(1.4); opacity: 0; }
+}
+
+/* ── 13. Footer ──────────────────────────────────────────────────────────── */
+.footer {
+  text-align: center;
+  padding: 35px 20px;
+  background: rgba(5, 12, 9, 0.95);
+  border-top: 2px solid rgba(163, 230, 53, 0.25);
+  color: rgba(209, 250, 229, 0.8);
+  font-size: 0.95rem;
+  position: relative;
+  z-index: 10;
+}
+
+.footer strong {
+  color: var(--neon-lime);
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+  font-size: 0.85rem;
+}
+
+.footer-nav a {
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+  color: var(--neon-lime);
+}
+
+/* ── 14. Responsive Queries ──────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hud-nav {
+    display: none;
+  }
+  .arcade-hud-bar {
+    font-size: 0.8rem;
+    gap: 8px;
+  }
+  .canister-wrapper {
+    width: 100%;
+  }
+  .arcade-controls-bar {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+}
